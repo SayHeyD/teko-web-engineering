@@ -12,5 +12,10 @@
   <ul>
     <li><a href="/vibe">VIBE</a></li>
   </ul>
+  <p>
+    <?php
+      echo "PHP Works!";
+    ?>
+  </p>
 </body>
 </html>
