@@ -4,10 +4,30 @@ $error = null;
 $heightInput = '';
 $weightInput = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' || isset($_GET['height'], $_GET['weight'])) {
-    $params = $_SERVER['REQUEST_METHOD'] === 'POST' ? $_POST : $_GET;
-    $heightInput = isset($params['height']) ? trim((string)$params['height']) : '';
-    $weightInput = isset($params['weight']) ? trim((string)$params['weight']) : '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $heightInput = isset($_POST['height']) ? trim((string)$_POST['height']) : '';
+    $weightInput = isset($_POST['weight']) ? trim((string)$_POST['weight']) : '';
+
+    if ($heightInput !== '' && $weightInput !== '') {
+        $heightCm = filter_var($heightInput, FILTER_VALIDATE_FLOAT);
+        $weightKg = filter_var($weightInput, FILTER_VALIDATE_FLOAT);
+
+        if ($heightCm !== false && $weightKg !== false && $heightCm > 0 && $weightKg > 0) {
+            $redirectUrl = '/vibe/calculate-bmi.php?' . http_build_query([
+                'height' => $heightInput,
+                'weight' => $weightInput,
+            ]);
+            header('Location: ' . $redirectUrl, true, 303);
+            exit;
+        } else {
+            $error = 'Please provide valid positive values for height and weight.';
+        }
+    } else {
+        $error = 'Please provide valid positive values for height and weight.';
+    }
+} elseif (isset($_GET['height']) || isset($_GET['weight'])) {
+    $heightInput = isset($_GET['height']) ? trim((string)$_GET['height']) : '';
+    $weightInput = isset($_GET['weight']) ? trim((string)$_GET['weight']) : '';
 
     if ($heightInput !== '' && $weightInput !== '') {
         $heightCm = filter_var($heightInput, FILTER_VALIDATE_FLOAT);
