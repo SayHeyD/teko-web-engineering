@@ -34,6 +34,29 @@ main {
     padding: 2rem;
 }
 
+.home-content {
+    max-width: 800px;
+    margin: 0 auto;
+    color: #333;
+    line-height: 1.6;
+}
+
+.home-content section {
+    margin-bottom: 1.5rem;
+}
+
+.home-content h2 {
+    color: #009797;
+    margin-bottom: 0.5rem;
+}
+
+.home-content .formula {
+    display: inline-block;
+    background: #e6f4f4;
+    border-left: 4px solid #009797;
+    padding: 0.5rem 0.75rem;
+}
+
 .navbar {
     color: white;
     display: flex;
