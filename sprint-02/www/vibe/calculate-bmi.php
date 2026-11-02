@@ -53,28 +53,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>VIBE - Calculate BMI</title>
 </head>
 <body>
-<h1>VIBE</h1>
+<nav class="navbar">
+  <h1><a href="/vibe/">VIBE</a></h1>
 
-<p>
-  Calculate your BMI!
-</p>
-
-<hr>
-
-<nav>
-  <ul>
+  <ul class="navlinks">
     <li><a href="/vibe/">Home</a></li>
-    <li><a href="#" onclick="return false;">Calculate BMI</a></li>
+    <li><a class="active" href="#" onclick="return false;">Calculate BMI</a></li>
     <li><a href="/vibe/bmi-statistics.html">BMI Statistics</a></li>
     <li><a href="/vibe/bmi-category.html">BMI Categories</a></li>
   </ul>
 </nav>
 
-<hr>
-
-<main>
+<main class="page-content">
+  <section>
   <h2>Calculate Your BMI</h2>
-  <form id="bmi-form" method="post" action="/vibe/calculate-bmi.php">
+  <p>Calculate your BMI!</p>
+  <form class="bmi-form" id="bmi-form" method="post" action="/vibe/calculate-bmi.php">
     <div>
       <label for="height">Height (cm):</label>
       <input type="number" id="height" name="height" step="any" min="1" required placeholder="e.g. 175" value="<?= htmlspecialchars($heightInput, ENT_QUOTES, 'UTF-8') ?>">
@@ -93,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <p style="color: red;"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
     <?php endif; ?>
   </div>
+  </section>
 </main>
 </body>
 </html>
