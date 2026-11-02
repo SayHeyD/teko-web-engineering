@@ -1,5 +1,7 @@
 <?php
 $bmi = null;
+$bmiClass = null;
+$bmiCategory = null;
 $error = null;
 $heightInput = '';
 $weightInput = '';
@@ -36,6 +38,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($heightCm !== false && $weightKg !== false && $heightCm > 0 && $weightKg > 0) {
             $heightM = $heightCm / 100;
             $bmi = $weightKg / ($heightM * $heightM);
+
+            if ($bmi < 16) {
+                $bmiClass = 'severe-underweight';
+                $bmiCategory = 'Severely underweight';
+            } elseif ($bmi < 18.5) {
+                $bmiClass = 'underweight';
+                $bmiCategory = 'Underweight';
+            } elseif ($bmi < 25) {
+                $bmiClass = 'normal';
+                $bmiCategory = 'Normal weight';
+            } elseif ($bmi < 30) {
+                $bmiClass = 'overweight';
+                $bmiCategory = 'Overweight';
+            } elseif ($bmi < 35) {
+                $bmiClass = 'obese';
+                $bmiCategory = 'Obese';
+            } else {
+                $bmiClass = 'severe-obesity';
+                $bmiCategory = 'Severely obese';
+            }
         } else {
             $error = 'Please provide valid positive values for height and weight.';
         }
@@ -80,9 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit" id="calculate-btn">Calculate BMI</button>
   </form>
 
-  <div id="result" aria-live="polite">
+  <div id="result" aria-live="polite"<?php if ($bmi !== null): ?> class="bmi-result <?= $bmiClass ?>"<?php endif; ?>>
     <?php if ($bmi !== null): ?>
       <p>Your calculated BMI is <strong><?= number_format($bmi, 2) ?></strong>.</p>
+      <p>Category: <strong><?= $bmiCategory ?></strong>.</p>
     <?php elseif ($error !== null): ?>
       <p style="color: red;"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
     <?php endif; ?>
