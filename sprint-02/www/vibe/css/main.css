@@ -9,17 +9,20 @@ body {
 }
 
 table {
-  border-collapse: collapse;
-  border: 1px solid black;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #c5dada;
+    background: white;
 }
 
 thead {
-    background-color: #acacac;
-    border-bottom: 2px solid black;
+    color: white;
+    background-color: #009797;
+    border-bottom: 2px solid #007777;
 }
 
-th, tr, td {
-  border: 1px solid black;
+th, td {
+    border: 1px solid #c5dada;
 }
 
 th {
@@ -30,22 +33,34 @@ td {
     padding: 0.5rem;
 }
 
+tbody tr:nth-child(even) {
+    background: #f4fafa;
+}
+
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
 main {
     padding: 2rem;
 }
 
-.home-content {
+.home-content,
+.page-content {
     max-width: 800px;
     margin: 0 auto;
     color: #333;
     line-height: 1.6;
 }
 
-.home-content section {
+.home-content section,
+.page-content section {
     margin-bottom: 1.5rem;
 }
 
-.home-content h2 {
+.home-content h2,
+.page-content h2 {
     color: #009797;
     margin-bottom: 0.5rem;
 }
@@ -57,6 +72,45 @@ main {
     padding: 0.5rem 0.75rem;
 }
 
+.bmi-form {
+    max-width: 480px;
+    padding: 1.25rem;
+    border: 1px solid #d3e5e5;
+    border-left: 4px solid #009797;
+    background: #f4fafa;
+}
+
+.bmi-form div {
+    margin-bottom: 1rem;
+}
+
+.bmi-form label {
+    display: block;
+    margin-bottom: 0.35rem;
+}
+
+.bmi-form input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #aaa;
+    font: inherit;
+}
+
+.bmi-form button {
+    padding: 0.65rem 1rem;
+    border: 0;
+    background: #009797;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+}
+
+#result {
+    max-width: 480px;
+    margin-top: 1rem;
+}
+
 .navbar {
     color: white;
     display: flex;
@@ -64,6 +118,7 @@ main {
     align-items: center;
     background: #009797;
     padding: 0 2rem;
+    flex-wrap: wrap;
 }
 
 .navbar a {
@@ -81,6 +136,7 @@ main {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .navbar h1 {
