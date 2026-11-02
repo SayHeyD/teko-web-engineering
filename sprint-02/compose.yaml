@@ -1,0 +1,16 @@
+services:
+  nginx:
+    build: ./nginx/
+    ports:
+      - "127.0.0.1:8866:80"
+
+    volumes:
+      - ./www/:/var/www/html/
+
+    depends_on:
+      - php
+
+  php:
+    build: ./php/
+    volumes:
+      - ./www/:/var/www/html/
