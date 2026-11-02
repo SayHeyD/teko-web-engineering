@@ -111,6 +111,48 @@ main {
     margin-top: 1rem;
 }
 
+.bmi-result {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-left: 4px solid;
+}
+
+.bmi-result p:last-child {
+    margin-bottom: 0;
+}
+
+.bmi-result.severe-underweight,
+.bmi-result.severe-obesity {
+    background: #ffebee;
+    border-color: #c62828;
+    color: #8e0000;
+}
+
+.bmi-result.underweight {
+    background: #fff8e1;
+    border-color: #f9a825;
+    color: #6d4c00;
+}
+
+.bmi-result.normal {
+    background: #e8f5e9;
+    border-color: #2e7d32;
+    color: #1b5e20;
+}
+
+.bmi-result.overweight {
+    background: #fff3e0;
+    border-color: #ef6c00;
+    color: #7f3f00;
+}
+
+.bmi-result.obese {
+    background: #ffe0b2;
+    border-color: #e65100;
+    color: #6d2c00;
+}
+
 .navbar {
     color: white;
     display: flex;
