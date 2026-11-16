@@ -1,0 +1,132 @@
+{
+  "statistics": [
+    {
+      "name": "Austria",
+      "iso3166": "AT",
+      "rank": 118,
+      "total": 25.4,
+      "male": 26.5,
+      "female": 24.4
+    },
+    {
+      "name": "Belgium",
+      "iso3166": "BE",
+      "rank": 113,
+      "total": 25.5,
+      "male": 26.2,
+      "female": 24.7
+    },
+    {
+      "name": "Czechia",
+      "iso3166": "CZ",
+      "rank": 55,
+      "total": 26.9,
+      "male": 27.8,
+      "female": 26.0
+    },
+    {
+      "name": "France",
+      "iso3166": "FR",
+      "rank": 123,
+      "total": 25.3,
+      "male": 26.1,
+      "female": 24.6
+    },
+    {
+      "name": "Germany",
+      "iso3166": "DE",
+      "rank": 79,
+      "total": 26.3,
+      "male": 27.0,
+      "female": 25.6
+    },
+    {
+      "name": "Hong Kong",
+      "iso3166": "HK",
+      "rank": null,
+      "total": null,
+      "male": null,
+      "female": null
+    },
+    {
+      "name": "Italy",
+      "iso3166": "IT",
+      "rank": 124,
+      "total": 25.3,
+      "male": 26.1,
+      "female": 24.5
+    },
+    {
+      "name": "Liechtenstein",
+      "iso3166": "LI",
+      "rank": null,
+      "total": null,
+      "male": null,
+      "female": null
+    },
+    {
+      "name": "Spain",
+      "iso3166": "ES",
+      "rank": 63,
+      "total": 26.7,
+      "male": 27.4,
+      "female": 26.0
+    },
+    {
+      "name": "Sweden",
+      "iso3166": "SE",
+      "rank": 105,
+      "total": 25.8,
+      "male": 26.7,
+      "female": 24.9
+    },
+    {
+      "name": "Switzerland",
+      "iso3166": "CH",
+      "rank": 125,
+      "total": 25.3,
+      "male": 26.7,
+      "female": 23.8
+    },
+    {
+      "name": "Taiwan",
+      "iso3166": "TW",
+      "rank": null,
+      "total": null,
+      "male": null,
+      "female": null
+    },
+    {
+      "name": "Turkey",
+      "iso3166": "TR",
+      "rank": 31,
+      "total": 27.8,
+      "male": 27.1,
+      "female": 28.5
+    },
+    {
+      "name": "United Kingdom",
+      "iso3166": "GB",
+      "rank": 40,
+      "total": 27.3,
+      "male": 27.5,
+      "female": 27.1
+    },
+    {
+      "name": "United States",
+      "iso3166": "US",
+      "rank": 20,
+      "total": 28.8,
+      "male": 28.8,
+      "female": 28.8
+    },
+    {
+      "name": "Vatican City",
+      "iso3166": "VA",
+      "rank": null,
+      "total": null,
+      "male": null,
+      "female": null
+    }
+  ]
+}
