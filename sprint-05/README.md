@@ -5,6 +5,8 @@ The application is reachable via the docker container on port `http://localhost:
 If you do not want to use docker, the `www` directory contains the static files.
 
 ## Features
+- Single Page Application (SPA) architecture powered by custom `page.js` router.
+- Client-side routing with dynamic SEO metadata updates and JSON-LD schema support.
 - Bootstrap 5 framework integration for responsive design across all viewports.
 - Responsive mobile-friendly navigation bar.
 - Interactive BMI Statistics displayed in an expandable Bootstrap Accordion.

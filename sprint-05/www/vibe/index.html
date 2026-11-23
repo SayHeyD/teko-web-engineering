@@ -4,9 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Welcome to VIBE - Vitality • Intake • Body • Exercise. Discover body mass index fundamentals and health metrics.">
+  <link rel="canonical" href="http://localhost:8866/vibe/">
+  <meta property="og:title" content="VIBE">
+  <meta property="og:description" content="Welcome to VIBE - Vitality • Intake • Body • Exercise. Discover body mass index fundamentals and health metrics.">
+  <script type="application/ld+json">{}</script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="/vibe/css/main.css">
   <script src="/vibe/js/menu.js" defer></script>
+  <script src="/vibe/js/api.js" defer></script>
+  <script src="/vibe/js/calculate-bmi.js" defer></script>
+  <script src="/vibe/js/bmi-statistics.js" defer></script>
+  <script src="/vibe/js/bmi-category.js" defer></script>
+  <script src="/vibe/js/router.js" defer></script>
+  <script src="/vibe/js/seo.js" defer></script>
+  <script src="/vibe/js/view-loader.js" defer></script>
+  <script src="/vibe/js/routes.js" defer></script>
+  <script src="/vibe/js/page.js" defer></script>
   <title>VIBE</title>
 </head>
 <body class="bg-light">
@@ -24,43 +38,8 @@
     </div>
   </nav>
 
-  <main class="container my-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-10 col-xl-8">
-        <!-- Hero Section -->
-        <div class="card card-social border-0 shadow-sm mb-4">
-          <div class="card-body p-4 p-md-5 text-center">
-            <h1 class="display-5 fw-bold text-primary mb-3">Welcome to VIBE</h1>
-            <p class="lead text-muted mb-0">
-              <span class="badge bg-primary-subtle text-primary-emphasis px-3 py-2 fs-6 rounded-pill">Vitality • Intake • Body • Exercise</span>
-            </p>
-          </div>
-        </div>
-
-        <!-- Info Card: What is BMI? -->
-        <div class="card card-social border-0 shadow-sm mb-4">
-          <div class="card-body p-4">
-            <h2 class="h4 text-primary fw-bold mb-3">What is BMI?</h2>
-            <p class="card-text text-secondary lh-lg mb-0">
-              The Body Mass Index (BMI) is a standardized screening metric used to evaluate body weight relative to height. It serves as a practical assessment tool to categorize individuals into weight classifications, including underweight, normal weight, overweight, and obesity.
-            </p>
-          </div>
-        </div>
-
-        <!-- Info Card: Calculation Formula -->
-        <div class="card card-social border-0 shadow-sm">
-          <div class="card-body p-4">
-            <h2 class="h4 text-primary fw-bold mb-3">Calculation Formula</h2>
-            <p class="card-text text-secondary mb-3">
-              BMI is calculated by dividing body weight in kilograms by the square of height in meters:
-            </p>
-            <div class="formula-box">
-              <strong class="formula text-dark">BMI = weight (kg) / (height (m))²</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <main class="container my-5" id="app">
+    <!-- Populated by SPA router (page.js) -->
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

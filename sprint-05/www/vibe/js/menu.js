@@ -1,8 +1,8 @@
 const menuItems = [
   { label: 'Home', href: '/vibe/' },
-  { label: 'Calculate BMI', href: '/vibe/calculate-bmi.html' },
-  { label: 'BMI Statistics', href: '/vibe/bmi-statistics.html' },
-  { label: 'BMI Categories', href: '/vibe/bmi-category.html' }
+  { label: 'Calculate BMI', href: '/vibe/calculate-bmi' },
+  { label: 'BMI Statistics', href: '/vibe/bmi-statistics' },
+  { label: 'BMI Categories', href: '/vibe/bmi-category' }
 ];
 
 function renderMenu() {
@@ -22,17 +22,16 @@ function renderMenu() {
     const a = document.createElement('a');
     a.className = 'nav-link';
     a.textContent = item.label;
+    a.href = item.href;
 
     const isHome = (item.href === '/vibe/' && (path === '/vibe/' || path === '/vibe/index.html' || path === '/vibe'));
-    const isCurrent = path === item.href || path.endsWith(item.href);
+    const cleanPath = path.replace(/\/+$/, '').replace(/\.html$/, '');
+    const cleanHref = item.href.replace(/\/+$/, '').replace(/\.html$/, '');
+    const isCurrent = cleanPath === cleanHref;
 
     if (isHome || isCurrent) {
       a.classList.add('active');
       a.setAttribute('aria-current', 'page');
-      a.href = '#';
-      a.setAttribute('onclick', 'return false;');
-    } else {
-      a.href = item.href;
     }
 
     li.appendChild(a);

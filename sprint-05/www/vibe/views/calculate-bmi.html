@@ -1,0 +1,34 @@
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card card-social border-0 shadow-sm">
+      <div class="card-body p-4 p-md-5">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold text-primary mb-2">Calculate Your BMI</h2>
+          <p class="text-muted">Enter your body measurements below to check your Body Mass Index.</p>
+        </div>
+
+        <form id="bmi-form" novalidate>
+          <div class="mb-3">
+            <label for="height" class="form-label fw-semibold">Height (cm)</label>
+            <div class="input-group">
+              <input type="number" class="form-control form-control-lg" id="height" name="height" step="any" min="1" required placeholder="e.g. 175">
+              <span class="input-group-text bg-light text-muted">cm</span>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="weight" class="form-label fw-semibold">Weight (kg)</label>
+            <div class="input-group">
+              <input type="number" class="form-control form-control-lg" id="weight" name="weight" step="any" min="1" required placeholder="e.g. 70">
+              <span class="input-group-text bg-light text-muted">kg</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-vibe btn-lg w-100 shadow-sm" id="calculate-btn">Calculate BMI</button>
+        </form>
+
+        <div id="result" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</div>

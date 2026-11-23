@@ -10,3 +10,4 @@ Contains all assignments for the Web Engineering Module (WEE) at the TEKO HF
 * [Sprint 02](/sprint-02)
 * [Sprint 03](/sprint-03)
 * [Sprint 04](/sprint-04)
+* [Sprint 05](/sprint-05)
