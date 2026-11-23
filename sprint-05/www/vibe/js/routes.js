@@ -14,6 +14,7 @@
 function registerRoutes(pageInstance, helpers) {
   const router = pageInstance || window.page;
   const loadViewFn = (helpers && helpers.loadView) || window.loadView;
+  const preloadViewFn = (helpers && helpers.preloadView) || window.preloadView;
   const setMetaFn = (helpers && helpers.setMeta) || window.setMeta;
   const setJSONLDFn = (helpers && helpers.setJSONLD) || window.setJSONLD;
 
@@ -23,79 +24,124 @@ function registerRoutes(pageInstance, helpers) {
   router.base("/vibe");
 
   /**
+   * Helper to register a route with automatic hover preloading for its view template.
+   */
+  function defineRoute(path, viewUrl, onRender, metaConfig, jsonLdConfig) {
+    if (typeof router.preload === 'function') {
+      router.preload(path, function () {
+        if (typeof preloadViewFn === 'function') {
+          preloadViewFn(viewUrl);
+        }
+      });
+    }
+
+    router(path, function () {
+      loadViewFn(viewUrl).then(function () {
+        if (typeof onRender === 'function') {
+          onRender();
+        }
+        if (typeof renderMenu === 'function') {
+          renderMenu();
+        }
+      });
+      if (metaConfig) {
+        setMetaFn(metaConfig.title, metaConfig.description, metaConfig.canonical);
+      }
+      if (jsonLdConfig) {
+        setJSONLDFn(jsonLdConfig.type, jsonLdConfig.data);
+      }
+    });
+  }
+
+  /**
    * Route: Home ('/')
    */
-  router("/", function () {
-    loadViewFn("/vibe/views/home.html").then(function () {
-      if (typeof renderMenu === 'function') renderMenu();
-    });
-    setMetaFn(
-      "VIBE - Home",
-      "Welcome to VIBE - Vitality • Intake • Body • Exercise. Discover body mass index fundamentals and health metrics.",
-      window.location.origin + "/vibe/"
-    );
-    setJSONLDFn("WebPage", {
-      name: "VIBE Home",
-      url: window.location.origin + "/vibe/"
-    });
-  });
+  defineRoute(
+    "/",
+    "/vibe/views/home.html",
+    null,
+    {
+      title: "VIBE - Home",
+      description: "Welcome to VIBE - Vitality • Intake • Body • Exercise. Discover body mass index fundamentals and health metrics.",
+      canonical: window.location.origin + "/vibe/"
+    },
+    {
+      type: "WebPage",
+      data: {
+        name: "VIBE Home",
+        url: window.location.origin + "/vibe/"
+      }
+    }
+  );
 
   /**
    * Route: Calculate BMI ('/calculate-bmi')
    */
-  router("/calculate-bmi", function () {
-    loadViewFn("/vibe/views/calculate-bmi.html").then(function () {
+  defineRoute(
+    "/calculate-bmi",
+    "/vibe/views/calculate-bmi.html",
+    function () {
       if (typeof initCalculateBmi === 'function') initCalculateBmi();
-      if (typeof renderMenu === 'function') renderMenu();
-    });
-    setMetaFn(
-      "VIBE - Calculate BMI",
-      "Calculate your Body Mass Index (BMI) quickly and accurately with our interactive calculator.",
-      window.location.origin + "/vibe/calculate-bmi"
-    );
-    setJSONLDFn("WebApplication", {
-      name: "Calculate BMI",
-      url: window.location.origin + "/vibe/calculate-bmi"
-    });
-  });
+    },
+    {
+      title: "VIBE - Calculate BMI",
+      description: "Calculate your Body Mass Index (BMI) quickly and accurately with our interactive calculator.",
+      canonical: window.location.origin + "/vibe/calculate-bmi"
+    },
+    {
+      type: "WebApplication",
+      data: {
+        name: "Calculate BMI",
+        url: window.location.origin + "/vibe/calculate-bmi"
+      }
+    }
+  );
 
   /**
    * Route: BMI Statistics ('/bmi-statistics')
    */
-  router("/bmi-statistics", function () {
-    loadViewFn("/vibe/views/bmi-statistics.html").then(function () {
+  defineRoute(
+    "/bmi-statistics",
+    "/vibe/views/bmi-statistics.html",
+    function () {
       if (typeof loadAndRenderBmiStatistics === 'function') loadAndRenderBmiStatistics();
-      if (typeof renderMenu === 'function') renderMenu();
-    });
-    setMetaFn(
-      "VIBE - BMI Statistics",
-      "View international BMI statistics across countries and demographics with interactive accordion cards.",
-      window.location.origin + "/vibe/bmi-statistics"
-    );
-    setJSONLDFn("DataFeed", {
-      name: "BMI Statistics",
-      url: window.location.origin + "/vibe/bmi-statistics"
-    });
-  });
+    },
+    {
+      title: "VIBE - BMI Statistics",
+      description: "View international BMI statistics across countries and demographics with interactive accordion cards.",
+      canonical: window.location.origin + "/vibe/bmi-statistics"
+    },
+    {
+      type: "DataFeed",
+      data: {
+        name: "BMI Statistics",
+        url: window.location.origin + "/vibe/bmi-statistics"
+      }
+    }
+  );
 
   /**
    * Route: BMI Categories ('/bmi-category')
    */
-  router("/bmi-category", function () {
-    loadViewFn("/vibe/views/bmi-category.html").then(function () {
+  defineRoute(
+    "/bmi-category",
+    "/vibe/views/bmi-category.html",
+    function () {
       if (typeof loadAndRenderBmiCategories === 'function') loadAndRenderBmiCategories();
-      if (typeof renderMenu === 'function') renderMenu();
-    });
-    setMetaFn(
-      "VIBE - BMI Categories",
-      "Overview of standard World Health Organization BMI categories and classifications.",
-      window.location.origin + "/vibe/bmi-category"
-    );
-    setJSONLDFn("ItemList", {
-      name: "BMI Categories",
-      url: window.location.origin + "/vibe/bmi-category"
-    });
-  });
+    },
+    {
+      title: "VIBE - BMI Categories",
+      description: "Overview of standard World Health Organization BMI categories and classifications.",
+      canonical: window.location.origin + "/vibe/bmi-category"
+    },
+    {
+      type: "ItemList",
+      data: {
+        name: "BMI Categories",
+        url: window.location.origin + "/vibe/bmi-category"
+      }
+    }
+  );
 }
 
 window.AppRoutes = {

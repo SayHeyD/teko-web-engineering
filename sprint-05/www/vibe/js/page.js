@@ -57,6 +57,14 @@ page.replace = function (path) {
   routerInstance.replace(path);
 };
 
+page.preload = function (path, handler) {
+  if (typeof handler === 'function') {
+    routerInstance.registerPreload(path, handler);
+  } else {
+    routerInstance.preload(path);
+  }
+};
+
 page.start = function () {
   routerInstance.start();
 };
@@ -94,6 +102,15 @@ page.loadView = function (url, containerId) {
   return Promise.reject(new Error('ViewLoader subsystem is unavailable'));
 };
 
+page.preloadView = function (url) {
+  if (window.ViewLoader && typeof window.ViewLoader.preloadView === 'function') {
+    return window.ViewLoader.preloadView(url);
+  } else if (typeof preloadView === 'function') {
+    return preloadView(url);
+  }
+  return Promise.reject(new Error('ViewLoader subsystem is unavailable'));
+};
+
 // ===========================================================================
 // Subsystem Exposure (for debugging or direct extension)
 // ===========================================================================
@@ -115,6 +132,7 @@ window.page = page;
 if (window.AppRoutes && typeof window.AppRoutes.registerRoutes === 'function') {
   window.AppRoutes.registerRoutes(page, {
     loadView: page.loadView,
+    preloadView: page.preloadView,
     setMeta: page.setMeta,
     setJSONLD: page.setJSONLD
   });

@@ -9,6 +9,7 @@ class Router {
   constructor() {
     this.basePath = '';
     this.routes = [];
+    this.preloadHandlers = new Map();
     this.started = false;
   }
 
@@ -123,6 +124,42 @@ class Router {
   }
 
   /**
+   * Registers a preloading callback handler for a specific route path.
+   *
+   * @param {string} path - Route path.
+   * @param {Function} handler - Preloading callback.
+   */
+  registerPreload(path, handler) {
+    if (typeof path === 'string' && typeof handler === 'function') {
+      this.preloadHandlers.set(this.normalizePath(path), handler);
+    }
+  }
+
+  /**
+   * Triggers the preloading callback associated with a route path.
+   *
+   * @param {string} [pathname] - Route pathname to preload.
+   */
+  preload(pathname) {
+    let current = pathname || this.getPathname();
+    if (this.basePath && current.startsWith(this.basePath)) {
+      current = current.slice(this.basePath.length);
+    }
+    if (!current.startsWith('/')) {
+      current = '/' + current;
+    }
+
+    for (const [routePath, handler] of this.preloadHandlers.entries()) {
+      if (this.matchRoute(routePath, current)) {
+        if (typeof handler === 'function') {
+          handler();
+        }
+        return;
+      }
+    }
+  }
+
+  /**
    * Configures or retrieves base path prefix.
    *
    * @param {string} [base] - Base URL path.
@@ -162,7 +199,7 @@ class Router {
   }
 
   /**
-   * Starts event listeners for popstate and internal link click interception.
+   * Starts event listeners for popstate, internal link click interception, and hover preloading.
    */
   start() {
     if (this.started) {
@@ -175,28 +212,45 @@ class Router {
       this.dispatch();
     });
 
+    const getValidInternalLink = (target) => {
+      const link = target.closest('a');
+      if (!link) return null;
+
+      if (link.target && link.target !== '_self') return null;
+      if (link.hasAttribute('download')) return null;
+      if (link.getAttribute('rel') === 'external') return null;
+
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return null;
+
+      if (link.origin && link.origin !== window.location.origin) return null;
+
+      const linkPath = link.pathname;
+      if (this.basePath && !linkPath.startsWith(this.basePath)) return null;
+
+      return link;
+    };
+
+    // Preload views on hover or touchstart
+    const handlePreload = (e) => {
+      const link = getValidInternalLink(e.target);
+      if (!link) return;
+      this.preload(link.pathname);
+    };
+
+    document.addEventListener('mouseover', handlePreload, { passive: true });
+    document.addEventListener('touchstart', handlePreload, { passive: true });
+
     document.addEventListener('click', (e) => {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
         return;
       }
 
-      const link = e.target.closest('a');
+      const link = getValidInternalLink(e.target);
       if (!link) return;
 
-      if (link.target && link.target !== '_self') return;
-      if (link.hasAttribute('download')) return;
-      if (link.getAttribute('rel') === 'external') return;
-
-      const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
-
-      if (link.origin && link.origin !== window.location.origin) return;
-
-      const linkPath = link.pathname;
-      if (this.basePath && !linkPath.startsWith(this.basePath)) return;
-
       e.preventDefault();
-      this.show(linkPath);
+      this.show(link.pathname);
     });
 
     this.dispatch();
